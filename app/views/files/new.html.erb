@@ -10,7 +10,14 @@
   <%= form_for :upload, url: {action: "create"}, :html =>{:multipart => true} do |f| %>
       <%= f.file_field :files %>
       <br/>
-      <%= f.submit "Upload", class: 'btn btn-info' %>
+      <%= f.submit "Upload", class: 'btn btn-info', disabled: true %>
   <% end %>
 </div>
+<script>
+  $(':file').change(function () {
+    if($(this).val() != '' && $(this).val() != undefined){
+        $(':submit').attr('disabled', false)
+    }
+  })
+</script>
 
