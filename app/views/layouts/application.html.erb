@@ -2,13 +2,16 @@
 <html>
 <head>
   <title>Myapp</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag    "application", "bootstrap.min", :media => "all" %>
+  <%= javascript_include_tag "application","jquery-3.1.0.min" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+<div class="container">
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+  <%= yield %>
+</div>
 </body>
 </html>

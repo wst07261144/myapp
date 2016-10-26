@@ -1,0 +1,45 @@
+<style>
+  .alert-notice{
+      background-color: #449d44;
+      text-align: center;
+      color: #ffffff;
+      font-size: 16px;
+  }
+</style>
+<nav class="navbar navbar-default t-margin-20" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header center">
+      <a class="navbar-brand" href="#">文件列表</a>
+    </div>
+  </div>
+</nav>
+
+<a href="<%= new_file_path%>" class="btn btn-info" style="margin-bottom: 20px">上传文件</a>
+
+<table class="table table-striped table-bordered table-condensed">
+  <tr>
+    <th>文件名</th>
+  </tr>
+  <% @files.each do |file| %>
+      <tr>
+        <td>
+          <a href="javascript:void(0)" file_id="<%= file.id %>" name="download"><%= file.name %></a>
+        </td>
+      </tr>
+  <% end %>
+</table>
+
+<script>
+    $('[name=download]').click(function () {
+        var file_id = $(this).attr('file_id');
+        $.ajax({
+            url: '/files/' + file_id + '/download',
+            type: 'GET',
+            success: function () {
+                alert('下载成功,请到桌面查找新下载的文件')
+            },
+            error: function () {
+            }
+        })
+    })
+</script>
